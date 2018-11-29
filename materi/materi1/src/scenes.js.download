@@ -1,0 +1,518 @@
+$(document).ready(function(){
+var numSteps = 7;
+var a = "";
+var selectedSlide = 0;
+
+var mq;
+
+// ================================
+// Classes 
+// ================================
+var Model = Backbone.Model.extend({
+    defaults: {
+        currentStage: 0,
+        timeOfDay: "day",
+        sunPosition: "hidden",
+        observerPosition: "hidden",
+        allowSunSwitch: false
+    },
+
+    stages: [
+        "intro",
+        "night",
+        "particles",
+        "scatter",
+        "raleigh",
+        "physics",
+        "skyblue",
+        "skyothercolors",
+        "conclusion"
+    ],
+    
+    initialize: function() {
+    },
+    
+    next: function() {
+        if (this.get("currentStage") < this.stages.length - 1) {
+            this.set("currentStage", this.get("currentStage") + 1);
+        } else {
+            this.set("currentStage", 0);
+        }
+    },
+    
+    prev: function() {
+        if (this.get("currentStage") > 0 ) {
+            this.set("currentStage", this.get("currentStage") - 1);
+        } else {
+            this.set("currentStage", this.stages.length - 1);
+        }
+    },
+    
+    toggleSun: function() {
+        var sunPosition = this.get("sunPosition") == "up" ? "down" : "up";
+        this.set({"sunPosition": sunPosition});
+    },
+    
+    getCurrentStage: function() {
+        var currentStage = this.get("currentStage");
+        return this.stages[currentStage];
+    }
+
+});
+
+var SunView = Backbone.View.extend({
+
+    initialize: function() {
+        _.bindAll(this, 'render');
+        this.model.on('change:sunPosition', this.render);
+    },
+    
+    render: function() {
+        var sunPosition = this.model.get("sunPosition");
+        
+        $(this.el).removeClass("up");
+        $(this.el).removeClass("in");
+
+        var sunUp, sunDown, sunIn;
+        switch(mq) {
+            case "phone":
+                sunUp = {
+                    left: '330px',
+                    top: '70px'
+                };
+                sunDown = {
+                    left: '0px',
+                    top: '190px'
+                };
+                sunIn = {
+                    left: '260px',
+                    top: '300px'
+                };
+                break;
+            case "tablet":
+                sunUp = {
+                    left: '500px',
+                    top: '120px'
+                };
+                sunDown = {
+                    left: '-10px',
+                    top: '280px'
+                };
+                sunIn = {
+                    left: '430px',
+                    top: '450px'
+                };
+                break;
+            case "desktop":
+                sunUp = {
+                    left: '490px',
+                    top: '80px'
+                };
+                sunDown = {
+                    left: '-80px',
+                    top: '310px'
+                };
+                sunIn = {
+                    left: '470px',
+                    top: '540px'
+                };
+                break;
+            case "desktop-large":
+                sunUp = {
+                    left: '850px',
+                    top: '50px'
+                };
+                sunDown = {
+                    left: '-70px',
+                    top: '300px'
+                };
+                sunIn = {
+                    left: '710px',
+                    top: '620px'
+                };
+                break;
+        }
+
+        switch (sunPosition) {
+            case "up":
+                $(this.el).addClass("up");
+                $(this.el).animate(sunUp, 1200).show();
+                break;
+            case "in":
+                $(this.el).addClass("in");
+                $(this.el).animate(sunIn, 1200).show();
+                break;
+            case "down":
+                $(this.el).addClass("down");
+                $(this.el).animate(sunDown, 1200).show();
+                break;
+            default:
+                $(this.el).hide()
+            break;
+        }
+        
+        return this;
+    }
+    
+});
+
+var SunlightViewLow = Backbone.View.extend({
+
+    initialize: function() {
+        _.bindAll(this, 'render');
+        this.model.on('change:sunPosition', this.render);
+    },
+    
+    render: function() {
+        var sunPosition = this.model.get("sunPosition");
+        
+        switch (sunPosition) {
+            case "up":
+                $(this.el).fadeOut(600);
+                break;
+            case "down":
+                $(this.el).delay(2400).fadeIn(600);
+                break;
+            default:
+                $(this.el).hide()
+            break;
+        }
+
+        return this;
+    }
+    
+});
+
+var SunlightViewHigh = Backbone.View.extend({
+
+    initialize: function() {
+        _.bindAll(this, 'render');
+        this.model.on('change:sunPosition', this.render);
+    },
+    
+    render: function() {
+        var sunPosition = this.model.get("sunPosition");
+        
+        switch (sunPosition) {
+            case "up":
+                $(this.el).delay(2400).fadeIn(600);
+                break;
+            case "down":
+                $(this.el).fadeOut(600);
+                break;
+            default:
+                $(this.el).hide()
+            break;
+        }
+
+        return this;
+    }
+    
+});
+
+
+var ObserverView = Backbone.View.extend({
+
+    initialize: function() {
+        _.bindAll(this, 'render');
+        this.model.on('change:sunPosition', this.render);
+    },
+    
+    render: function() {
+        var sunPosition = this.model.get("sunPosition");
+        var sunUp, sunDown, sunIn;
+        switch (sunPosition) {
+            case "up":
+                $(this.el).fadeIn();
+                break;
+            case "down":
+                $(this.el).fadeIn();
+                break;
+            default:
+                $(this.el).hide()
+            break;
+        }
+
+        return this;
+    }
+    
+});
+
+var SunSwitchView = Backbone.View.extend({
+
+    events: {
+        'click': 'toggle'
+    },
+
+    initialize: function() {
+        _.bindAll(this, 'render', 'toggle');
+        this.model.on('change:allowSunSwitch', this.render);
+    },
+    
+    toggle: function() {
+        var sunPosition = this.model.get("sunPosition");
+        var view = this;
+        this.model.toggleSun();
+    },
+    
+    render: function() {
+        var allowSunSwitch = this.model.get("allowSunSwitch") && true; 
+        if (allowSunSwitch) {
+            var view = this;
+            $(this.el).delay(5000).fadeIn(2000, function() {
+                view.delegateEvents(view.events);
+            })
+        } else {
+            $(this.el).fadeOut()
+            this.undelegateEvents()
+        }
+
+        return this;
+    }
+    
+});
+
+var ShareButtonView = Backbone.View.extend({
+    initialize: function() {
+        _.bindAll(this, 'render');
+        this.model.on('change:currentStage', this.render);
+    },
+    
+    render: function() {
+        if (this.model.get('currentStage') == 8) {
+            $(this.el).fadeIn(1200);
+        } else {
+            $(this.el).hide();
+        }
+
+        return this;
+    }
+    
+    
+})
+
+
+var View = Backbone.View.extend({
+
+    events: {
+        "click #next": "nextStage",
+        "click #prev": "previousStage",
+        "keydown": "processKey"
+    },
+
+    eventsDisabled: {
+        "keydown": "processKey"
+    },
+    
+    isEventsDisabled: false,
+
+    initialize: function() {
+        _.bindAll(this, 'render', 'enableButtons', 'disableButtons', 'showParticles', 'toggleSun');
+        this.model.on('change:currentStage', this.render);
+        this.model.on('change:sunPosition', this.toggleSun);
+
+        this.sunView = new SunView({"model": model, "el": "#sun"});
+        this.sunlightLowView = new SunlightViewLow({"model": model, "el": "#sunlight-02"});
+        this.sunlightHighView = new SunlightViewHigh({"model": model, "el": "#sunlight-01"});
+        this.scatterLowView = new SunlightViewLow({"model": model, "el": "#scattering-02"});
+        this.scatterHighView = new SunlightViewHigh({"model": model, "el": "#scattering-01"});
+        this.observerView = new ObserverView({"model": model, "el": "#observer"});
+        this.sunSwitchView = new SunSwitchView({"model": model, "el": "#switch-sun"});
+        this.shareButtonView = new ShareButtonView({"model": model, "el": "#share-bar"})
+    },
+    
+    processKey: function(e) {
+        if (this.isEventsDisabled) {
+            return true;
+        }
+        if (e.keyCode == 37 && this.model.get("currentStage") == 7) { 
+            this.previousStage();
+        } else if (e.keyCode == 39) {
+            this.nextStage();
+            return false;
+        }
+        return true;
+    },
+
+    nextStage: function() {
+        this.model.next();
+    },
+
+    previousStage: function() {
+        this.model.prev();
+    },
+
+    showIntro: function(callback) {
+        $("#stage-conclusion").hide();
+        $("#earth-day").fadeIn(800);
+        $("#shade").slideDown(800, function() {
+            $("#stage-intro").fadeIn(600, callback);
+        });
+        $("#next").text("MULAI");
+        this.model.set({sunPosition: "hidden"});
+    },
+    showNight: function(callback) {
+        $("#stage-intro").fadeOut(600, function() {
+            $("#shade").slideUp(800);
+            $("#earth-night").fadeIn(800);
+            $("#stage-night").delay(800).fadeIn(600, callback);
+            $("#particle-detail:visible, #sun:visible, #particles:visible").fadeOut(800);
+        });
+        $("#next").text("LANJUT");
+        $("#toHome").hide();
+    },
+    showParticles: function(callback) {
+        var model = this.model;
+        $("#stage-night").fadeOut(600, function() {
+            model.set({sunPosition: "in"});
+            $("#particles").fadeIn({
+                "duration": 1000, 
+                "easing": "linear", 
+                "complete": function() {
+                    $("#stage-particles").fadeIn(600, callback);
+                    $("#particle-detail").fadeIn(600); 
+                }
+            });
+        });
+    },
+    showScatter: function(callback) {
+        $("#stage-particles").fadeOut(600, function() {
+            $("#stage-scatter").fadeIn(600, function() {
+                $("#particle-scatter").fadeIn(400, callback);
+            });
+        });
+    },
+    showRaleigh: function(callback) {
+        $("#stage-scatter").fadeOut(600, function() {
+            $("#particle-scatter").fadeOut(400);
+            $("#particle-detail").fadeOut(400, function() {
+                $("#stage-raleigh").fadeIn(600, callback);
+            });
+        });
+
+    },
+    showPhysics: function(callback) {
+        $("#stage-raleigh").fadeOut(600, function() {
+            $("#stage-physics").fadeIn(600, function() {
+                $("#wavelength-chart").fadeIn(600, callback);
+            });
+        });
+    },
+    showSkyblue: function(callback) {
+        var model = this.model;
+        $("#stage-physics").fadeOut(600, function() {
+            model.set({
+                "sunPosition": "up"
+            });
+            $("#earth-night").fadeOut({"duration": 2400, "easing": "linear"});
+            $("#stage-skyblue").delay(2400).fadeIn(600, callback);
+        });
+    },
+    showSkyothercolors: function(callback) {
+        var model = this.model;
+        model.set({
+            "sunPosition": "down"
+        });
+
+        $("#stage-skyblue").delay(1200).fadeOut(600, function() {
+
+            model.set({
+                "allowSunSwitch": true
+            });
+            $("#stage-skyothercolors").fadeIn(600, callback);
+        });
+
+    },
+    showConclusion: function(callback) {
+        $("#scattering-02, #sunlight-02, #scattering-01, #sunlight-01, #sun, #observer").fadeOut(400);
+        $("#stage-skyblue").fadeOut(600);
+        $("#stage-skyothercolors").fadeOut(600, function() {
+            $("#stage-conclusion").fadeIn(400, callback);
+            model.set({
+                "sunPosition": "hidden",
+                "allowSunSwitch": false
+            });
+        });
+        $("#next").text("ULANGI");
+        $("#toHome").show(400);
+    },
+    
+    enableButtons: function() {
+        this.isEventsDisabled = false;
+        this.undelegateEvents();
+        this.delegateEvents(this.events);
+        $(".bttn").removeClass("disabled");
+    },
+    
+    disableButtons: function() {
+        this.isEventsDisabled = true;
+        this.undelegateEvents();
+        this.delegateEvents(this.eventsDisabled);
+        $(".bttn").addClass("disabled");
+    },
+    
+    toggleSun: function() {
+        var sunPosition = this.model.get("sunPosition");
+        
+        if (sunPosition == "up") {
+            $("#stage-skyothercolors").fadeOut(600, function() {
+                $("#stage-skyblue").fadeIn();
+            });
+        } else if (sunPosition == "down") {
+            $("#stage-skyblue").fadeOut(600, function() {
+                $("#stage-skyothercolors").fadeIn();
+            });
+        }
+    },
+
+    render: function() {
+        var currentStageStr = this.model.getCurrentStage();
+        var fn = 'show' + currentStageStr.charAt(0).toUpperCase() + currentStageStr.slice(1);
+
+        if (this.model.get("currentStage") > 0) {
+            this.disableButtons();
+        }
+        this[fn](this.enableButtons);
+        
+        var height = $(window).height();
+        $("#wrapper").css({"height": height})
+        return this;
+    }
+})
+
+
+enquire.register("screen and (max-width: 480px)", {
+    match : function() {
+        mq = 'phone';
+    }
+});
+
+enquire.register("screen and (min-width: 481px) and (max-width: 767px)", {
+    match : function() {
+        mq = 'tablet';
+    }
+});
+
+enquire.register("screen and (min-width: 768px) and (max-width: 1399px)", {
+    match : function() {
+        mq = 'desktop';
+    }
+});
+
+enquire.register("screen and (min-width: 1400px)", {
+    match : function() {
+        mq = 'desktop-large';
+    }
+});
+
+
+var model = new Model();
+var view = new View({"model": model, el: "body"});
+view.render();
+
+
+// addthis.button("#btn-facebook");
+
+});
+
+

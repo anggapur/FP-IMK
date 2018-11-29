@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Astronot Muda Indonesia | Beranda
+	</title>
+	<!-- CSS Bootstrap-->
+	<link rel="stylesheet" type="text/css" href="asset/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="asset/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Particle -->
+	<link rel="stylesheet" media="screen" href="asset/plugin/particle/css/style.css">
+	<!-- Fontawesome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-4 left">
+					<a href="index.html" class="brand"><h1>Astronot Muda Indonesia</h1></a>
+				</div>
+				<div class="col-8 right">
+					<a href="signUp.html"><button class="joinNow">Jadi Astronot</button></a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="particles-js">
+		<div class="container">
+			<div class="row">
+				<h2>Belajar Hingga Menembus Angkasa</h2>
+				<img src="asset/img/if_rocket_286673.png" class="rocket">
+			</div>
+		</div>
+	</div>
+	<section id="partMateri">
+		<div class="container">
+			<div class="row">
+				<div class="col-3">
+					<a href="materi/materi1/index.html">
+						<div class="wrapMateri">
+							<img src="asset/img/earth-day.png" class="imgMateri">
+							<h3>Langit</h3>
+						</div>
+					</a>
+				</div>
+				<div class="col-3">
+					<div class="wrapMateri">
+						<img src="asset/img/earth-day.png" class="imgMateri">
+						<h3>Langit</h3>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="wrapMateri">
+						<img src="asset/img/earth-day.png" class="imgMateri">
+						<h3>Langit</h3>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="wrapMateri">
+						<img src="asset/img/earth-day.png" class="imgMateri">
+						<h3>Langit</h3>
+					</div>
+				</div>
+
+				<div class="col-12">
+					<p class="webDescription"><b>ASTRONOT MUDA INDONESIA</b> adalah sebuah website pembelajaran luar angkasa yang interaktif bagi anak - anak<br>
+						<a href="signUp.html" class="btnJoin">Jadi Astronot Sekarang</a>
+					</p>
+					<img src="asset/img/earth-day.png" class="imgMateri">
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<h2>Astronot Muda Indonesia</h2>
+				</div>
+				<div class="col-md-3">
+					<div class="footerMateriChild">
+						Langit
+					</div>
+					<div class="footerMateriChild">
+						Alam Semesta
+					</div>
+					<div class="footerMateriChild">
+						Bintang
+					</div>
+					<div class="footerMateriChild">
+						Tata Surya
+					</div>
+					<div class="footerMateriChild">
+						Lubang Hitam
+					</div>
+					<div class="footerMateriChild">
+						Explorasi Luar Angkasa
+					</div>
+					<div class="footerMateriChild">
+						Galaxy
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="footerMateriChild">
+						Beranda
+					</div>
+					<div class="footerMateriChild">
+						Daftar
+					</div>
+					<div class="footerMateriChild">
+						Tentang
+					</div>
+					<div class="footerMateriChild">
+						Kontak
+					</div>
+					<div class="footerMateriChild">
+						<a href="documentasi.html">Dokumentasi & Bantuan</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<h4>Ikuti Kami Di </h4>
+					<div class="sosmedChild">
+						<a href=""> <i class="fab fa-twitter"></i> </a>
+					</div>
+					<div class="sosmedChild">
+						<a href=""> <i class="fab fa-facebook"></i> </a>
+					</div>
+					<div class="sosmedChild">
+						<a href=""> <i class="fab fa-instagram"></i> </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- particles.js container -->
+	<!-- <div id="particles-js"></div> -->
+
+
+	<!-- Script-->
+	<!-- scripts -->
+	<script src="asset/plugin/particle/particles.js"></script>
+	<script src="asset/plugin/particle/js/app.js"></script>
+
+	<!-- stats.js -->
+	<!-- <script src="asset/plugin/particle/js/lib/stats.js"></script> -->
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		var lastScrollTop = 0;
+		  
+		$(window).scroll(function(event){
+		   var st = $(this).scrollTop();
+		   if (st > lastScrollTop){
+		     $('img.rocket').animate({
+			    bottom: "900",
+			  }, 3000, function() {
+			    $('img.rocket').animate({
+			    	bottom:"20px"
+			    },2000);
+			  });
+		   } else {
+		      // upscroll code
+		   }
+		   lastScrollTop = st;
+		});
+	</script>
+</body>
+</html>
