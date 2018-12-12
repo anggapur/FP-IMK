@@ -205,6 +205,13 @@
 				{
 					$("#alertEmail").show();
 				}
+				else
+				{
+					$("#alertEmail").removeClass('alert-danger').addClass('alert-success').html('Berhasil Buat Akun Baru').show();
+					setTimeout(function(){
+						window.location.href="dashboard.html";
+					},2000);
+				}
 				e.preventDefault();
 			});
 		});

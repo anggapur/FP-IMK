@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Astronot Muda Indonesia | Login
+	</title>
+	<!-- CSS Bootstrap-->
+	<link rel="stylesheet" type="text/css" href="asset/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="asset/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Particle -->
+	<link rel="stylesheet" media="screen" href="asset/plugin/particle/css/style.css">
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+</head>
+<body>
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-4 left">
+					<a href="index.html" class="brand"><h1>Astronot Muda Indonesia</h1></a>
+				</div>
+				<div class="col-8 right">
+					<a href="signUp.html"><button class="joinNow">Daftar</button></a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<section class="signUpBody">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-sm-push-2" style="margin:80px auto 0px auto">
+					<div class="alert alert-danger" style="color: white;background: #d9534f;border: #d9534f;display: none;">
+					  <h4 style="color: white;">Gagal Login!</h4>
+					  Kombinasi Email & Password Salah
+					</div>
+					<form id="formLogin">
+					<div class="jTron">
+						<div class="jTronInside">
+						<h3>Ayo Login!</h3>
+						<div class="form-group">
+				      		<label>Email</label>
+				      		<input id="email" type="text" name="text" class="form-control" placeholder="Email" required>
+				      	</div>
+				      	<div class="form-group">
+				      		<label>Password</label>
+				      		<input id="password" type="password" name="text" class="form-control" placeholder="Password" required>
+				      	</div>
+						<button class="pilihBtn" id="btnDaftar">Login</button><br>
+						<p class="orLoginWord">Atau</p>
+						<a class="pilihBtn">Gunakan <img src="asset/img/google_PNG19635.png" class="googleLogo"></a>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="container footerSignUp">
+			<div class="row">
+				<div class="col-md-3">
+					<h2>Astronot Muda Indonesia</h2>
+				</div>
+				<div class="col-md-3">
+					<div class="footerMateriChild">
+						Langit
+					</div>
+					<div class="footerMateriChild">
+						Alam Semesta
+					</div>
+					<div class="footerMateriChild">
+						Bintang
+					</div>
+					<div class="footerMateriChild">
+						Tata Surya
+					</div>
+					<div class="footerMateriChild">
+						Lubang Hitam
+					</div>
+					<div class="footerMateriChild">
+						Explorasi Luar Angkasa
+					</div>
+					<div class="footerMateriChild">
+						Galaxy
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="footerMateriChild">
+						Beranda
+					</div>
+					<div class="footerMateriChild">
+						Daftar
+					</div>
+					<div class="footerMateriChild">
+						Tentang
+					</div>
+					<div class="footerMateriChild">
+						Kontak
+					</div>
+					<div class="footerMateriChild">
+						<a href="documentasi.html">Dokumentasi & Bantuan</a>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<h4>Ikuti Kami Di </h4>
+					<div class="sosmedChild">
+						<a href=""> <i class="fab fa-twitter"></i> </a>
+					</div>
+					<div class="sosmedChild">
+						<a href=""> <i class="fab fa-facebook"></i> </a>
+					</div>
+					<div class="sosmedChild">
+						<a href=""> <i class="fab fa-instagram"></i> </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="asset/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$("#formLogin").submit(function(e){
+					
+				// alert($("#password").val());
+				if($("#email").val().toLowerCase() == "arimbawaangga@gmail.com" && $("#password").val().toLowerCase() == "anggapur123")
+				{
+					// alert('Berhasil Login');
+					$('.alert-danger').fadeOut();
+					window.location.href="dashboard.html";
+				}else
+				{
+					$('.alert-danger').fadeIn();
+					setTimeout(function(){
+						$('.alert-danger').fadeOut();
+					},3000);
+				}
+				e.preventDefault();
+			});
+		});
+	</script>
+	
+</body>
+</html>
