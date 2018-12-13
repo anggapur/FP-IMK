@@ -12,7 +12,12 @@
 	<link rel="stylesheet" media="screen" href="asset/plugin/particle/css/style.css">
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
+	<style type="text/css">
+		section.signUpBody {
+		    padding-top: 0px !important;
+		}
+	</style>
+	
 </head>
 <body class="dashboard">
 	<header>
@@ -31,65 +36,14 @@
 	<section class="signUpBody">
 		<div class="container">
 			<div class="row">
-				<div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri active">
-							<img src="asset/img/CLD.png" class="imgMateri">
-							<h3>Langit</h3>
+				<div class="col-md-12 col-sm-push-2 whiteBG" style="margin:80px auto 0px auto">
+					<div class="jTron">
+						<div class="jTronInside">
+							<h3 style="border-bottom: none;padding-bottom: 30px;">Performa Hasil Quiz</h3>
+							<canvas id="myChart"></canvas>
 						</div>
-					</a>
-				</div>
-				<div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/earth-day.png" class="imgMateri">
-							<h3>Planet</h3>
-						</div>
-					</a>
-				</div><div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/solar2.png" class="imgMateri">
-							<h3>Tata Surya</h3>
-						</div>
-					</a>
-				</div><div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/star.png" class="imgMateri">
-							<h3>Bintang</h3>
-						</div>
-					</a>
-				</div>
-				<div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/CLD.png" class="imgMateri">
-							<h3>Langit</h3>
-						</div>
-					</a>
-				</div>
-				<div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/earth-day.png" class="imgMateri">
-							<h3>Planet</h3>
-						</div>
-					</a>
-				</div><div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/solar2.png" class="imgMateri">
-							<h3>Tata Surya</h3>
-						</div>
-					</a>
-				</div><div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/star.png" class="imgMateri">
-							<h3>Bintang</h3>
-						</div>
-					</a>
+					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -196,6 +150,44 @@
 				window.location.href="login.html";
 				e.preventDefault();
 			});
+		});
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script type="text/javascript">
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'bar',
+		     // scaleStartValue : 0 ,
+		    // The data for our dataset
+		    data: {
+		        labels: ["Materi Langit", "Materi Tata Surya", "Materi Planet", "Materi Bintang", "Materi Roket", "Materi Mars", "Materi Bumi"],
+		        datasets: [{
+		            label: "Nilai Saya",
+		            backgroundColor: '#6fcdcd',
+		            borderColor: '#6fcdcd',
+		            data: [100,90,80,85,70,95,100],
+		        },
+		        {
+		            label: "Rata - Rata Nilai Semua Pengguna",
+		            backgroundColor: 'red',
+		            borderColor: 'red',
+		            data: [100,80,82,70,50,95,80],
+		        }]
+		    },
+		     options: {
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    suggestedMin: 0,
+		                    suggestedMax: 100
+		                }
+		            }]
+		        }
+		    },
+
+		    // Configuration options go here
+		    // options: {}
 		});
 	</script>
 	

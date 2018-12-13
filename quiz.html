@@ -13,6 +13,56 @@
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
+	<link rel="stylesheet" type="text/css" href="asset/quiz/dist/jquery.quiz-min.css" />
+	<style type="text/css">
+		a#quiz-next-btn {
+		    text-shadow: none;
+		}
+		p#quiz-results {
+		    font-size: 32px;
+		}
+		div#quiz-counter {
+		    font-size: 20px;
+		}
+
+		p.question {
+		    font-size: 30px;
+		}
+
+		.jTronInside {}
+
+		.jTronInside {
+		    padding: 10px;
+		}
+
+		div#quiz {
+		    padding: 0px 76px;
+		}
+
+		section.signUpBody {
+		    padding-top: 10px !important;
+		}
+		ul.answers li a {
+		    color: #619cb1;
+		    text-shadow: none;
+		}
+		div#quiz-controls {
+		    font-size: 18px;
+		}
+
+		p#quiz-response {
+		    margin-bottom: 0px;
+		}
+
+		a#quiz-finish-btn {
+		    text-shadow: none;
+		    margin-bottom: 16px;
+		}
+		a#see {
+		    font-size: 24px;
+		    background: #407c98;
+		}
+	</style>
 </head>
 <body class="dashboard">
 	<header>
@@ -31,65 +81,23 @@
 	<section class="signUpBody">
 		<div class="container">
 			<div class="row">
-				<div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri active">
-							<img src="asset/img/CLD.png" class="imgMateri">
-							<h3>Langit</h3>
+				<div class="col-md-8 col-sm-push-2" style="margin:80px auto 0px auto">
+					<form id="formLogin">
+					<div class="jTron">
+						<div class="jTronInside">
+							<div id="quiz">
+							  <div id="quiz-header">
+							    <h1>Quiz</h1>
+							    <!-- <p><a id="quiz-home-btn">Home</a></p> -->
+							  </div>
+							  <div id="quiz-start-screen">
+							    <p><a href="#" id="quiz-start-btn" class="quiz-button">Mulai</a><br>
+							    	<a href="hasilQuiz.html" id="see" class="quiz-button">Lihat Hasil</a></p>
+							  </div>
+							</div>
 						</div>
-					</a>
-				</div>
-				<div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/earth-day.png" class="imgMateri">
-							<h3>Planet</h3>
-						</div>
-					</a>
-				</div><div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/solar2.png" class="imgMateri">
-							<h3>Tata Surya</h3>
-						</div>
-					</a>
-				</div><div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/star.png" class="imgMateri">
-							<h3>Bintang</h3>
-						</div>
-					</a>
-				</div>
-				<div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/CLD.png" class="imgMateri">
-							<h3>Langit</h3>
-						</div>
-					</a>
-				</div>
-				<div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/earth-day.png" class="imgMateri">
-							<h3>Planet</h3>
-						</div>
-					</a>
-				</div><div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/solar2.png" class="imgMateri">
-							<h3>Tata Surya</h3>
-						</div>
-					</a>
-				</div><div class="col-3">
-					<a href="detail.html">
-						<div class="wrapMateri">
-							<img src="asset/img/star.png" class="imgMateri">
-							<h3>Bintang</h3>
-						</div>
-					</a>
+					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -198,6 +206,72 @@
 			});
 		});
 	</script>
+	<script src="asset/quiz/dist/jquery.quiz-min.js"></script>
+<script>
+  $('#quiz').quiz({
+    //resultsScreen: '#results-screen',
+    //counter: false,
+    //homeButton: '#custom-home',
+    counterFormat: 'Pertanyaan ke %current dari %total',
+    questions: [
+      {
+        'q': 'Kenapa Langit Biru?',
+        'options': [
+          'Karena Mengandung Air',
+          'Efek Pembiasan Cahaya Matahari',
+          'Memantulkan warna laut',
+        ],
+        'correctIndex': 1,
+        'correctResponse': 'Custom correct response.',
+        'incorrectResponse': 'Custom incorrect response.'
+      },
+      {
+        'q': 'A smaple question?',
+        'options': [
+          'Answer 1',
+          'Answer 2'
+        ],
+        'correctIndex': 1,
+        'correctResponse': 'Custom correct response.',
+        'incorrectResponse': 'Custom incorrect response.'
+      },
+      {
+        'q': 'A smaple question?',
+        'options': [
+          'Answer 1',
+          'Answer 2',
+          'Answer 3',
+          'Answer 4'
+        ],
+        'correctIndex': 2,
+        'correctResponse': 'Custom correct response.',
+        'incorrectResponse': 'Custom incorrect response.'
+      },
+      {
+        'q': 'A smaple question?',
+        'options': [
+          'Answer 1',
+          'Answer 2'
+        ],
+        'correctIndex': 1,
+        'correctResponse': 'Custom correct response.',
+        'incorrectResponse': 'Custom incorrect response.'
+      },
+      {
+        'q': 'A smaple question?',
+        'options': [
+          'Answer 1',
+          'Answer 2',
+          'Answer 3',
+          'Answer 4'
+        ],
+        'correctIndex': 3,
+        'correctResponse': 'Custom correct response.',
+        'incorrectResponse': 'Custom incorrect response.'
+      }
+    ]
+  });
+</script>
 	
 </body>
 </html>

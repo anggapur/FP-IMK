@@ -130,7 +130,14 @@
 					// alert('Berhasil Login');
 					$('.alert-danger').fadeOut();
 					window.location.href="dashboard.html";
-				}else
+				}
+				else if($("#email").val().toLowerCase() == "admin" && $("#password").val().toLowerCase() == "admin")
+				{
+					// alert('Berhasil Login');
+					$('.alert-danger').fadeOut();
+					window.location.href="dashboardAdmin.html";
+				}
+				else
 				{
 					$('.alert-danger').fadeIn();
 					setTimeout(function(){
